@@ -1,30 +1,57 @@
 import inquirer from 'inquirer';
 
-inquirer
-  .prompt([
+const questions = [
     /* Pass your questions in here */
     {
         type: 'input',
-        name: 'input_type', 
+        name: 'name', 
         message: 'What is your name?',
-        default:'Super Admin'
+        validate:(answer)=>{
+                if(answer === ''){
+                    return 'Please enter a valid name'
+                }
+                    return true
+        }
     },
     {
-        type: 'list',
-        name: 'list question', 
-        message: 'What programming language do you like?',
-        choices:['JavaScript', 'C++','Java','Python'],
-        default:'JavaScript'
+        type: 'input',
+        name: 'height', 
+        message: 'What is your height (in inches)? ',
+        validate:(answer)=>{
+            if(isNaN(answer)){
+                return 'Please enter a valid number'
+            }
+                return true
+        }
     },
     {
-        type: 'checkbox',
-        name: 'checkbox question', 
-        message: 'How many programming languages do you speak?',
-        choices:['JavaScript', 'C++','Java','Python'],
-        default:'JavaScript'
+        type: 'input',
+        name: 'weight', 
+        message: 'What is your current weight (in pound)? ',
+        validate:(answer)=>{
+            if(isNaN(answer)){
+                return 'Please enter a valid number'
+            }
+                return true
+        }
     },
-  ])
+  ];
+
+console.log('----------BMI CALCULATOR----------');
+
+inquirer
+  .prompt(questions)
   .then((answers) => {
     // Use user feedback for... whatever!!
-    console.log(answers)
+    const height = answers.height;
+    const weight = answers.weight;
+    const name = answers.name;
+
+    const BMI = (weight / (height*height))*703;
+
+ if(BMI < 16){
+    console.log(`${name}, your BMI is ${BMI} and it is considered to be severely under weight`);
+ }else{
+    console.log(`${name}, your BMI is ${BMI}`);
+ }
   });
