@@ -4,12 +4,13 @@
   "description": "Command Line Package",
   "main": "index.js",
   "scripts": {
-    "start": "index.js",
+    "start": "node index.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "author": "Benson",
   "license": "ISC",
+  "type": "module",
   "dependencies": {
-    "inquirer": "^9.2.10"
+    "inquirer": "^8.0.0"
   }
 }
